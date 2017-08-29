@@ -1,0 +1,27 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let field of vmDefinition">
+      <fw-dynamic-field [field]="field" [form]="form" [operation]="operation" [submitted]="submitted"></fw-dynamic-field>
+    </div>
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      {{errorMesage}}
+    </div>
+    <div *ngIf="status != 'waiting'">
+      <div *ngIf="operation==='details'">
+        <button class="btn" type="button" (click)="onBack()">Back</button>
+        <button class="btn btn-primary" type="button" (click)="onEdit()">Edit</button>
+      </div>
+      <div *ngIf="operation === 'edit'">
+          <button class="btn" type="button" (click)="onCancel()">Cancel</button>
+          <button class="btn btn-primary" type="button" (click)="onSave()">Save</button>
+      </div>
+      <div *ngIf="operation === 'create'">
+        <button class="btn" type="button" (click)="onBack()">Back</button>
+        <button class="btn btn-primary" type="button" (click)="onCreate()">Create</button>
+      </div>
+    </div>
+    <div *ngIf="status === 'waiting'">
+      Waiting...
+    </div>
+  </form>
+</div>
